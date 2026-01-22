@@ -6,8 +6,10 @@ Minimalistisk, professionell "hire me"-sida med interaktiv LLM-funktionalitet.
 
 - **LLM-ikoner med modal preview**: Klicka för att se prompten innan den skickas till AI-tjänsten
 - **Auto-fill för Perplexity**: Prompt fylls i automatiskt (andra tjänster: clipboard-kopiering)
-- **5 designvarianter**: Välj mellan Brutalist, Luxury, Neo-Brutalism, Glassmorphism, Retro-Futuristic
-- **Editorial design**: Dark theme med IBM Plex Mono och electric cyan accenter
+- **15 HELT olika designvarianter**: Från ultra-minimal till maximalist chaos
+  - **4 Slick & Minimal**: Swiss, Japanese, Scandinavian, Apple-esque
+  - **6 Wild & Experimental**: Brutalist Terminal, Neo-Brutalism, Glassmorphism, Cyberpunk, Bauhaus, Memphis
+  - **5 Retro & Elegant**: Luxury Editorial, Retro-Futuristic, Newspaper, Vaporwave, Art Deco
 - **Responsiv**: Mobile-first design som fungerar på alla enheter
 - **Ren vanilla stack**: HTML, CSS, JS - inga dependencies
 - **Production-ready**: Kan hostas statiskt överallt
