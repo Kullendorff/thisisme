@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$ johan --hire</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="terminal">
+        <div class="terminal-header">
+            <span class="terminal-button red"></span>
+            <span class="terminal-button yellow"></span>
+            <span class="terminal-button green"></span>
+            <span class="terminal-title">johan@portfolio:~$</span>
+        </div>
+
+        <div class="terminal-body">
+            <pre class="ascii-art">
+   ___  ___   _  _   _   _  _
+  |_  |/ _ \ | || | /_\ | \| |
+   | || (_) || __ |/ _ \| .` |
+  |___|\___/ |_||_/_/ \_\_|\_|
+            </pre>
+
+            <div class="command-line">
+                <span class="prompt">johan@portfolio:~$</span> <span class="command">cat profile.txt</span>
+            </div>
+
+            <div class="output">
+                <p><span class="label">NAME:</span> Johan Kullendorff</p>
+                <p><span class="label">ROLE:</span> Senior Technical Advisor | Journalist | Utvecklare</p>
+                <p><span class="label">LOCATION:</span> Göteborg, Sverige</p>
+                <p><span class="label">STATUS:</span> <span class="status-available">AVAILABLE</span></p>
+            </div>
+
+            <div class="command-line">
+                <span class="prompt">johan@portfolio:~$</span> <span class="command">./ask_ai.sh --list</span>
+            </div>
+
+            <div class="ai-grid">
+                <button class="ai-btn" data-service="openai" data-url="https://chat.openai.com/">
+                    <span class="ai-label">[1] OPENAI</span>
+                </button>
+                <button class="ai-btn" data-service="claude" data-url="https://claude.ai/new">
+                    <span class="ai-label">[2] CLAUDE</span>
+                </button>
+                <button class="ai-btn" data-service="gemini" data-url="https://gemini.google.com/">
+                    <span class="ai-label">[3] GEMINI</span>
+                </button>
+                <button class="ai-btn" data-service="perplexity" data-url="https://perplexity.ai/">
+                    <span class="ai-label">[4] PERPLEXITY</span>
+                </button>
+                <button class="ai-btn" data-service="mistral" data-url="https://chat.mistral.ai/">
+                    <span class="ai-label">[5] MISTRAL</span>
+                </button>
+            </div>
+
+            <div class="hint">
+                <span class="prompt">→</span> Click to execute AI query | Prompt auto-copied to clipboard
+            </div>
+
+            <div class="command-line">
+                <span class="prompt">johan@portfolio:~$</span> <span class="command">cat skills.txt</span>
+            </div>
+
+            <div class="skills-list">
+                <div class="skill-block">
+                    <h3>[TECH] Problemlösning</h3>
+                    <p>5+ år second-line support för globalt techföretag. Komplexa felsökningar, eskalering, processutveckling.</p>
+                </div>
+                <div class="skill-block">
+                    <h3>[COMM] Kommunikation</h3>
+                    <p>Journalist och redigerare. Koordinerade produktion av 13 dagstidningar. Förklarar komplext för alla målgrupper.</p>
+                </div>
+                <div class="skill-block">
+                    <h3>[DEV] Automation</h3>
+                    <p>Python, Flask, REST APIs, Discord-botar, AI-integrationer (Claude, OpenAI, Google).</p>
+                </div>
+            </div>
+
+            <div class="command-line">
+                <span class="prompt">johan@portfolio:~$</span> <span class="command">git log --oneline</span>
+            </div>
+
+            <div class="timeline">
+                <div class="commit">2020-nu  <span class="hash">[webhelp]</span> Senior Technical Advisor</div>
+                <div class="commit">2017-18  <span class="hash">[hallmedia]</span> Journalist/Redigerare</div>
+                <div class="commit">2014-nu  <span class="hash">[amite]</span> Frilansjournalist</div>
+                <div class="commit">2012-15  <span class="hash">[hallpressen]</span> Redigerare/Lokaljournalist</div>
+                <div class="commit">20XX     <span class="hash">[jmg]</span> Journalistik, Göteborgs Universitet</div>
+            </div>
+
+            <div class="command-line">
+                <span class="prompt">johan@portfolio:~$</span> <span class="command">echo $CONTACT</span>
+            </div>
+
+            <div class="contact">
+                <a href="https://linkedin.com/in/johankullendorff" target="_blank">[LINKEDIN]</a>
+                <a href="https://github.com/Kullendorff" target="_blank">[GITHUB]</a>
+                <a href="mailto:johan.kullendorff@gmail.com">[EMAIL]</a>
+                <a href="tel:+46708669259">[PHONE]</a>
+            </div>
+
+            <div class="cursor-line">
+                <span class="prompt">johan@portfolio:~$</span><span class="cursor">_</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">✓ Prompt copied! Paste in chat.</div>
+
+    <script src="../../script.js"></script>
+</body>
+</html>

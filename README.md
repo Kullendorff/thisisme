@@ -4,7 +4,9 @@ Minimalistisk, professionell "hire me"-sida med interaktiv LLM-funktionalitet.
 
 ## ✨ Features
 
-- **LLM-ikoner**: Klicka för att kopiera en förskriven rekryterarprompt och öppna din valda AI-tjänst
+- **LLM-ikoner med modal preview**: Klicka för att se prompten innan den skickas till AI-tjänsten
+- **Auto-fill för Perplexity**: Prompt fylls i automatiskt (andra tjänster: clipboard-kopiering)
+- **5 designvarianter**: Välj mellan Brutalist, Luxury, Neo-Brutalism, Glassmorphism, Retro-Futuristic
 - **Editorial design**: Dark theme med IBM Plex Mono och electric cyan accenter
 - **Responsiv**: Mobile-first design som fungerar på alla enheter
 - **Ren vanilla stack**: HTML, CSS, JS - inga dependencies
@@ -25,6 +27,27 @@ git push -u origin main
 3. Under "Source", välj `main` branch och `/root` folder
 4. Klicka "Save"
 5. Din sida blir tillgänglig på: `https://kullendorff.github.io/thisisme/`
+
+## 🤖 Auto-Fill Functionality
+
+**How it works:**
+
+När någon klickar på en LLM-ikon:
+1. **Modal visas** med preview av prompten
+2. **Prompten kopieras** automatiskt till clipboard
+3. **Välj handling**:
+   - "Copy Only" - stäng modal, prompten är redan kopierad
+   - "Open [AI]" - öppna AI-tjänsten i ny flik
+
+**Auto-fill support:**
+- ✅ **Perplexity**: Full auto-fill via URL-parameter - prompten fylls i automatiskt
+- 📋 **Övriga tjänster** (ChatGPT, Claude, Gemini, Mistral): Clipboard-kopiering (de stödjer inte URL-parametrar av säkerhetsskäl)
+
+**Teknisk detalj:**
+- Använder `prompt-modal.js` för modal och smart routing
+- Perplexity får `?q=` parameter med encoded prompt
+- Andra tjänster öppnas direkt, prompt finns i clipboard
+- Fallback för äldre browsers som inte stödjer Clipboard API
 
 ## 🎨 Design Choices
 

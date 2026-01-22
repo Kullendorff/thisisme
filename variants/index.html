@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Variants - Choose Your Style</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0a0a0a;
+            color: #e8e8e8;
+            padding: 3rem 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #00f0ff, #b537f2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .intro {
+            text-align: center;
+            color: #999;
+            margin-bottom: 4rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .variants-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .variant-card {
+            background: #151515;
+            border: 2px solid #2a2a2a;
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .variant-card:hover {
+            border-color: #00f0ff;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 240, 255, 0.2);
+        }
+
+        .variant-number {
+            font-size: 0.875rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+        }
+
+        .variant-name {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .variant-desc {
+            color: #999;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .variant-features {
+            list-style: none;
+            padding: 0;
+        }
+
+        .variant-features li {
+            padding: 0.5rem 0;
+            color: #666;
+            font-size: 0.9375rem;
+        }
+
+        .variant-features li::before {
+            content: "▸ ";
+            color: #00f0ff;
+            margin-right: 0.5rem;
+        }
+
+        .variant-link {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.75rem 1.5rem;
+            background: transparent;
+            border: 2px solid #00f0ff;
+            color: #00f0ff;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .variant-link:hover {
+            background: #00f0ff;
+            color: #0a0a0a;
+        }
+
+        /* Unique colors for each variant */
+        .v1 .variant-name { color: #0f0; }
+        .v1:hover { border-color: #0f0; box-shadow: 0 12px 40px rgba(0, 255, 0, 0.2); }
+        .v1 .variant-link { border-color: #0f0; color: #0f0; }
+        .v1 .variant-link:hover { background: #0f0; color: #000; }
+
+        .v2 .variant-name { color: #d4af37; }
+        .v2:hover { border-color: #d4af37; box-shadow: 0 12px 40px rgba(212, 175, 55, 0.2); }
+        .v2 .variant-link { border-color: #d4af37; color: #d4af37; }
+        .v2 .variant-link:hover { background: #d4af37; color: #0a0a0a; }
+
+        .v3 .variant-name { color: #ff006e; }
+        .v3:hover { border-color: #ff006e; box-shadow: 0 12px 40px rgba(255, 0, 110, 0.2); }
+        .v3 .variant-link { border-color: #ff006e; color: #ff006e; }
+        .v3 .variant-link:hover { background: #ff006e; color: #fff; }
+
+        .v4 .variant-name { color: #a78bfa; }
+        .v4:hover { border-color: #a78bfa; box-shadow: 0 12px 40px rgba(167, 139, 250, 0.2); }
+        .v4 .variant-link { border-color: #a78bfa; color: #a78bfa; }
+        .v4 .variant-link:hover { background: #a78bfa; color: #0a0a0a; }
+
+        .v5 .variant-name { color: #00f5ff; }
+        .v5:hover { border-color: #00f5ff; box-shadow: 0 12px 40px rgba(0, 245, 255, 0.2); }
+        .v5 .variant-link { border-color: #00f5ff; color: #00f5ff; }
+        .v5 .variant-link:hover { background: #00f5ff; color: #000; }
+
+        .back-link {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .back-link a {
+            color: #666;
+            text-decoration: none;
+        }
+
+        .back-link a:hover {
+            color: #00f0ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Choose Your Design</h1>
+        <p class="intro">
+            5 completely different portfolio designs, each with its own unique aesthetic.
+            Click to preview each variant and choose the one that represents you best.
+        </p>
+
+        <div class="variants-grid">
+            <div class="variant-card v1">
+                <div class="variant-number">VARIANT 01</div>
+                <h2 class="variant-name">Brutalist Terminal</h2>
+                <p class="variant-desc">
+                    Hacker aesthetic inspired by terminal interfaces. Raw, minimal, and unapologetically technical.
+                </p>
+                <ul class="variant-features">
+                    <li>JetBrains Mono & Space Mono</li>
+                    <li>Terminal UI with ASCII art</li>
+                    <li>Matrix green on black</li>
+                    <li>Command-line style navigation</li>
+                </ul>
+                <a href="v1-brutalist/index.html" class="variant-link">View Brutalist →</a>
+            </div>
+
+            <div class="variant-card v2">
+                <div class="variant-number">VARIANT 02</div>
+                <h2 class="variant-name">Luxury Editorial</h2>
+                <p class="variant-desc">
+                    Magazine-inspired design with elegant serif typography and gold accents. Sophisticated and refined.
+                </p>
+                <ul class="variant-features">
+                    <li>Playfair Display & Lato</li>
+                    <li>Editorial layout style</li>
+                    <li>Cream background with gold</li>
+                    <li>Print-inspired aesthetics</li>
+                </ul>
+                <a href="v2-luxury/index.html" class="variant-link">View Luxury →</a>
+            </div>
+
+            <div class="variant-card v3">
+                <div class="variant-number">VARIANT 03</div>
+                <h2 class="variant-name">Neo-Brutalism</h2>
+                <p class="variant-desc">
+                    Bold, playful, and modern with bright colors and thick borders. Energetic and attention-grabbing.
+                </p>
+                <ul class="variant-features">
+                    <li>Archivo Black & Space Grotesk</li>
+                    <li>Bright multi-color palette</li>
+                    <li>Heavy black borders & shadows</li>
+                    <li>Playful, skewed elements</li>
+                </ul>
+                <a href="v3-neo-brutalism/index.html" class="variant-link">View Neo-Brutalist →</a>
+            </div>
+
+            <div class="variant-card v4">
+                <div class="variant-number">VARIANT 04</div>
+                <h2 class="variant-name">Glassmorphism</h2>
+                <p class="variant-desc">
+                    Soft, premium design with frosted glass effects and subtle transparency. Modern and elegant.
+                </p>
+                <ul class="variant-features">
+                    <li>Outfit font family</li>
+                    <li>Backdrop blur & transparency</li>
+                    <li>Purple gradient background</li>
+                    <li>Floating glass cards</li>
+                </ul>
+                <a href="v4-glassmorphism/index.html" class="variant-link">View Glassmorphism →</a>
+            </div>
+
+            <div class="variant-card v5">
+                <div class="variant-number">VARIANT 05</div>
+                <h2 class="variant-name">Retro-Futuristic</h2>
+                <p class="variant-desc">
+                    80s synthwave aesthetic with neon colors, CRT effects, and grid backgrounds. Nostalgic and striking.
+                </p>
+                <ul class="variant-features">
+                    <li>Orbitron & Rajdhani</li>
+                    <li>Neon pink, cyan, green</li>
+                    <li>Scanlines & CRT effects</li>
+                    <li>Synthwave grid background</li>
+                </ul>
+                <a href="v5-retro/index.html" class="variant-link">View Retro →</a>
+            </div>
+        </div>
+
+        <div class="back-link">
+            <a href="../index.html">← Back to main portfolio</a>
+        </div>
+    </div>
+</body>
+</html>
