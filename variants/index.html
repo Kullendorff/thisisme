@@ -3,13 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Variants - Choose Your Style</title>
+    <title>15 Portfolio Variants - Choose Your Style</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -19,15 +15,12 @@
             line-height: 1.6;
         }
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+        .container { max-width: 1600px; margin: 0 auto; }
 
         h1 {
             text-align: center;
             font-size: 3rem;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             background: linear-gradient(135deg, #00f0ff, #b537f2);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -36,15 +29,32 @@
         .intro {
             text-align: center;
             color: #999;
-            margin-bottom: 4rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
+            margin-bottom: 1rem;
+        }
+
+        .category {
+            text-align: center;
+            color: #666;
+            font-size: 0.875rem;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+        }
+
+        .category-section { margin-bottom: 5rem; }
+
+        .category-title {
+            font-size: 1.5rem;
+            color: #00f0ff;
+            margin-bottom: 2rem;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
         }
 
         .variants-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 2rem;
             margin-bottom: 3rem;
         }
@@ -67,7 +77,7 @@
         }
 
         .variant-number {
-            font-size: 0.875rem;
+            font-size: 0.75rem;
             color: #666;
             margin-bottom: 0.5rem;
             font-weight: 600;
@@ -75,15 +85,16 @@
         }
 
         .variant-name {
-            font-size: 1.75rem;
+            font-size: 1.5rem;
             font-weight: 700;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
         }
 
         .variant-desc {
             color: #999;
-            margin-bottom: 1.5rem;
-            line-height: 1.7;
+            margin-bottom: 1rem;
+            font-size: 0.9375rem;
+            line-height: 1.6;
         }
 
         .variant-features {
@@ -92,9 +103,9 @@
         }
 
         .variant-features li {
-            padding: 0.5rem 0;
+            padding: 0.25rem 0;
             color: #666;
-            font-size: 0.9375rem;
+            font-size: 0.875rem;
         }
 
         .variant-features li::before {
@@ -103,49 +114,15 @@
             margin-right: 0.5rem;
         }
 
-        .variant-link {
-            display: inline-block;
-            margin-top: 1.5rem;
-            padding: 0.75rem 1.5rem;
-            background: transparent;
-            border: 2px solid #00f0ff;
-            color: #00f0ff;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
+        /* Unique colors for categories */
+        .slick .variant-name { color: #e0e0e0; }
+        .slick:hover { border-color: #e0e0e0; box-shadow: 0 12px 40px rgba(224, 224, 224, 0.15); }
 
-        .variant-link:hover {
-            background: #00f0ff;
-            color: #0a0a0a;
-        }
+        .wild .variant-name { color: #ff006e; }
+        .wild:hover { border-color: #ff006e; box-shadow: 0 12px 40px rgba(255, 0, 110, 0.2); }
 
-        /* Unique colors for each variant */
-        .v1 .variant-name { color: #0f0; }
-        .v1:hover { border-color: #0f0; box-shadow: 0 12px 40px rgba(0, 255, 0, 0.2); }
-        .v1 .variant-link { border-color: #0f0; color: #0f0; }
-        .v1 .variant-link:hover { background: #0f0; color: #000; }
-
-        .v2 .variant-name { color: #d4af37; }
-        .v2:hover { border-color: #d4af37; box-shadow: 0 12px 40px rgba(212, 175, 55, 0.2); }
-        .v2 .variant-link { border-color: #d4af37; color: #d4af37; }
-        .v2 .variant-link:hover { background: #d4af37; color: #0a0a0a; }
-
-        .v3 .variant-name { color: #ff006e; }
-        .v3:hover { border-color: #ff006e; box-shadow: 0 12px 40px rgba(255, 0, 110, 0.2); }
-        .v3 .variant-link { border-color: #ff006e; color: #ff006e; }
-        .v3 .variant-link:hover { background: #ff006e; color: #fff; }
-
-        .v4 .variant-name { color: #a78bfa; }
-        .v4:hover { border-color: #a78bfa; box-shadow: 0 12px 40px rgba(167, 139, 250, 0.2); }
-        .v4 .variant-link { border-color: #a78bfa; color: #a78bfa; }
-        .v4 .variant-link:hover { background: #a78bfa; color: #0a0a0a; }
-
-        .v5 .variant-name { color: #00f5ff; }
-        .v5:hover { border-color: #00f5ff; box-shadow: 0 12px 40px rgba(0, 245, 255, 0.2); }
-        .v5 .variant-link { border-color: #00f5ff; color: #00f5ff; }
-        .v5 .variant-link:hover { background: #00f5ff; color: #000; }
+        .retro .variant-name { color: #d4af37; }
+        .retro:hover { border-color: #d4af37; box-shadow: 0 12px 40px rgba(212, 175, 55, 0.2); }
 
         .back-link {
             text-align: center;
@@ -164,86 +141,190 @@
 </head>
 <body>
     <div class="container">
-        <h1>Choose Your Design</h1>
-        <p class="intro">
-            5 completely different portfolio designs, each with its own unique aesthetic.
-            Click to preview each variant and choose the one that represents you best.
-        </p>
+        <h1>15 Portfolio Designs</h1>
+        <p class="intro">Completely different aesthetics - from ultra-minimal to maximalist chaos</p>
+        <p class="category">Choose your vibe ↓</p>
 
-        <div class="variants-grid">
-            <div class="variant-card v1">
-                <div class="variant-number">VARIANT 01</div>
-                <h2 class="variant-name">Brutalist Terminal</h2>
-                <p class="variant-desc">
-                    Hacker aesthetic inspired by terminal interfaces. Raw, minimal, and unapologetically technical.
-                </p>
-                <ul class="variant-features">
-                    <li>JetBrains Mono & Space Mono</li>
-                    <li>Terminal UI with ASCII art</li>
-                    <li>Matrix green on black</li>
-                    <li>Command-line style navigation</li>
-                </ul>
-                <a href="v1-brutalist/index.html" class="variant-link">View Brutalist →</a>
+        <!-- SLICK & MINIMAL -->
+        <div class="category-section">
+            <h2 class="category-title">Slick & Minimal (Professional)</h2>
+            <div class="variants-grid">
+                <a href="v6-swiss/index.html" class="variant-card slick">
+                    <div class="variant-number">VARIANT 06</div>
+                    <h3 class="variant-name">Swiss Minimalism</h3>
+                    <p class="variant-desc">Ultimate simplicity. Grid-based perfection. Helvetica. Black & white clarity.</p>
+                    <ul class="variant-features">
+                        <li>Helvetica Neue typography</li>
+                        <li>Strict grid system</li>
+                        <li>Black & white only</li>
+                    </ul>
+                </a>
+
+                <a href="v7-japanese/index.html" class="variant-card slick">
+                    <div class="variant-number">VARIANT 07</div>
+                    <h3 class="variant-name">Japanese Minimal</h3>
+                    <p class="variant-desc">Zen simplicity. Generous whitespace. Subtle elegance. Ma (間) - negative space.</p>
+                    <ul class="variant-features">
+                        <li>Noto Sans & Serif</li>
+                        <li>Cream background</li>
+                        <li>Minimalist philosophy</li>
+                    </ul>
+                </a>
+
+                <a href="v8-scandinavian/index.html" class="variant-card slick">
+                    <div class="variant-number">VARIANT 08</div>
+                    <h3 class="variant-name">Scandinavian Clean</h3>
+                    <p class="variant-desc">Nordic design principles. Soft blues. Clean cards. Functional beauty.</p>
+                    <ul class="variant-features">
+                        <li>DM Sans font</li>
+                        <li>Nordic blue accents</li>
+                        <li>Hygge-inspired warmth</li>
+                    </ul>
+                </a>
+
+                <a href="v9-apple/index.html" class="variant-card slick">
+                    <div class="variant-number">VARIANT 09</div>
+                    <h3 class="variant-name">Apple-esque</h3>
+                    <p class="variant-desc">Cupertino precision. SF Pro Display. Blur effects. Premium simplicity.</p>
+                    <ul class="variant-features">
+                        <li>System fonts</li>
+                        <li>Backdrop blur</li>
+                        <li>iOS-inspired spacing</li>
+                    </ul>
+                </a>
             </div>
+        </div>
 
-            <div class="variant-card v2">
-                <div class="variant-number">VARIANT 02</div>
-                <h2 class="variant-name">Luxury Editorial</h2>
-                <p class="variant-desc">
-                    Magazine-inspired design with elegant serif typography and gold accents. Sophisticated and refined.
-                </p>
-                <ul class="variant-features">
-                    <li>Playfair Display & Lato</li>
-                    <li>Editorial layout style</li>
-                    <li>Cream background with gold</li>
-                    <li>Print-inspired aesthetics</li>
-                </ul>
-                <a href="v2-luxury/index.html" class="variant-link">View Luxury →</a>
+        <!-- WILD & EXPERIMENTAL -->
+        <div class="category-section">
+            <h2 class="category-title">Wild & Experimental</h2>
+            <div class="variants-grid">
+                <a href="v1-brutalist/index.html" class="variant-card wild">
+                    <div class="variant-number">VARIANT 01</div>
+                    <h3 class="variant-name">Brutalist Terminal</h3>
+                    <p class="variant-desc">Hacker aesthetic. Matrix green. Terminal UI. ASCII art. Raw & minimal.</p>
+                    <ul class="variant-features">
+                        <li>JetBrains Mono</li>
+                        <li>Green on black</li>
+                        <li>Command-line style</li>
+                    </ul>
+                </a>
+
+                <a href="v3-neo-brutalism/index.html" class="variant-card wild">
+                    <div class="variant-number">VARIANT 03</div>
+                    <h3 class="variant-name">Neo-Brutalism</h3>
+                    <p class="variant-desc">Bold. Playful. Bright colors. Thick borders. Heavy shadows. Maximum impact.</p>
+                    <ul class="variant-features">
+                        <li>Archivo Black</li>
+                        <li>Multi-color palette</li>
+                        <li>Skewed elements</li>
+                    </ul>
+                </a>
+
+                <a href="v4-glassmorphism/index.html" class="variant-card wild">
+                    <div class="variant-number">VARIANT 04</div>
+                    <h3 class="variant-name">Glassmorphism</h3>
+                    <p class="variant-desc">Frosted glass. Soft transparency. Purple gradients. Premium modern.</p>
+                    <ul class="variant-features">
+                        <li>Outfit font</li>
+                        <li>Backdrop blur effects</li>
+                        <li>Floating glass cards</li>
+                    </ul>
+                </a>
+
+                <a href="v10-cyberpunk/index.html" class="variant-card wild">
+                    <div class="variant-number">VARIANT 10</div>
+                    <h3 class="variant-name">Cyberpunk</h3>
+                    <p class="variant-desc">Dystopian future. Cyan & magenta. Grid backgrounds. Glitch effects.</p>
+                    <ul class="variant-features">
+                        <li>Share Tech Mono</li>
+                        <li>Neon colors</li>
+                        <li>Hex codes everywhere</li>
+                    </ul>
+                </a>
+
+                <a href="v14-bauhaus/index.html" class="variant-card wild">
+                    <div class="variant-number">VARIANT 14</div>
+                    <h3 class="variant-name">Bauhaus</h3>
+                    <p class="variant-desc">Modernist geometric. Primary colors. Asymmetric layout. Form follows function.</p>
+                    <ul class="variant-features">
+                        <li>Bold sans-serif</li>
+                        <li>Red, blue, yellow, black</li>
+                        <li>Geometric shapes</li>
+                    </ul>
+                </a>
+
+                <a href="v15-memphis/index.html" class="variant-card wild">
+                    <div class="variant-number">VARIANT 15</div>
+                    <h3 class="variant-name">Memphis Design</h3>
+                    <p class="variant-desc">80s postmodern. Squiggles. Patterns. Chaotic but structured. Maximum fun.</p>
+                    <ul class="variant-features">
+                        <li>Archivo Black</li>
+                        <li>Bright multi-colors</li>
+                        <li>Geometric patterns</li>
+                    </ul>
+                </a>
             </div>
+        </div>
 
-            <div class="variant-card v3">
-                <div class="variant-number">VARIANT 03</div>
-                <h2 class="variant-name">Neo-Brutalism</h2>
-                <p class="variant-desc">
-                    Bold, playful, and modern with bright colors and thick borders. Energetic and attention-grabbing.
-                </p>
-                <ul class="variant-features">
-                    <li>Archivo Black & Space Grotesk</li>
-                    <li>Bright multi-color palette</li>
-                    <li>Heavy black borders & shadows</li>
-                    <li>Playful, skewed elements</li>
-                </ul>
-                <a href="v3-neo-brutalism/index.html" class="variant-link">View Neo-Brutalist →</a>
-            </div>
+        <!-- RETRO & ELEGANT -->
+        <div class="category-section">
+            <h2 class="category-title">Retro & Elegant</h2>
+            <div class="variants-grid">
+                <a href="v2-luxury/index.html" class="variant-card retro">
+                    <div class="variant-number">VARIANT 02</div>
+                    <h3 class="variant-name">Luxury Editorial</h3>
+                    <p class="variant-desc">Magazine-inspired. Playfair Display. Gold accents. Cream & sophistication.</p>
+                    <ul class="variant-features">
+                        <li>Serif typography</li>
+                        <li>Gold on cream</li>
+                        <li>Print aesthetic</li>
+                    </ul>
+                </a>
 
-            <div class="variant-card v4">
-                <div class="variant-number">VARIANT 04</div>
-                <h2 class="variant-name">Glassmorphism</h2>
-                <p class="variant-desc">
-                    Soft, premium design with frosted glass effects and subtle transparency. Modern and elegant.
-                </p>
-                <ul class="variant-features">
-                    <li>Outfit font family</li>
-                    <li>Backdrop blur & transparency</li>
-                    <li>Purple gradient background</li>
-                    <li>Floating glass cards</li>
-                </ul>
-                <a href="v4-glassmorphism/index.html" class="variant-link">View Glassmorphism →</a>
-            </div>
+                <a href="v5-retro/index.html" class="variant-card retro">
+                    <div class="variant-number">VARIANT 05</div>
+                    <h3 class="variant-name">Retro-Futuristic</h3>
+                    <p class="variant-desc">80s synthwave. Neon colors. CRT effects. Grid perspective. Nostalgic future.</p>
+                    <ul class="variant-features">
+                        <li>Orbitron font</li>
+                        <li>Pink, cyan, green neon</li>
+                        <li>Scanlines & glow</li>
+                    </ul>
+                </a>
 
-            <div class="variant-card v5">
-                <div class="variant-number">VARIANT 05</div>
-                <h2 class="variant-name">Retro-Futuristic</h2>
-                <p class="variant-desc">
-                    80s synthwave aesthetic with neon colors, CRT effects, and grid backgrounds. Nostalgic and striking.
-                </p>
-                <ul class="variant-features">
-                    <li>Orbitron & Rajdhani</li>
-                    <li>Neon pink, cyan, green</li>
-                    <li>Scanlines & CRT effects</li>
-                    <li>Synthwave grid background</li>
-                </ul>
-                <a href="v5-retro/index.html" class="variant-link">View Retro →</a>
+                <a href="v11-newspaper/index.html" class="variant-card retro">
+                    <div class="variant-number">VARIANT 11</div>
+                    <h3 class="variant-name">Newspaper</h3>
+                    <p class="variant-desc">Classic print journalism. Column layout. Georgia serif. Editorial integrity.</p>
+                    <ul class="variant-features">
+                        <li>Georgia, Times New Roman</li>
+                        <li>Black & white</li>
+                        <li>Print-inspired</li>
+                    </ul>
+                </a>
+
+                <a href="v12-vaporwave/index.html" class="variant-card retro">
+                    <div class="variant-number">VARIANT 12</div>
+                    <h3 class="variant-name">Vaporwave</h3>
+                    <p class="variant-desc">A E S T H E T I C. Pastel pink & cyan. Japanese text. 90s internet nostalgia.</p>
+                    <ul class="variant-features">
+                        <li>VT323 monospace</li>
+                        <li>Pastel gradient bg</li>
+                        <li>Full-width characters</li>
+                    </ul>
+                </a>
+
+                <a href="v13-art-deco/index.html" class="variant-card retro">
+                    <div class="variant-number">VARIANT 13</div>
+                    <h3 class="variant-name">Art Deco</h3>
+                    <p class="variant-desc">1920s luxury. Geometric patterns. Gold & black. Gatsby elegance.</p>
+                    <ul class="variant-features">
+                        <li>Cinzel serif</li>
+                        <li>Gold, cream, black</li>
+                        <li>Ornamental borders</li>
+                    </ul>
+                </a>
             </div>
         </div>
 

@@ -1,0 +1,266 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    background: #fff;
+    color: #000;
+    line-height: 1.5;
+    font-weight: 300;
+}
+
+.grid-system {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.grid-container {
+    padding: 0 2rem;
+}
+
+/* Header */
+.header {
+    padding: 6rem 0 4rem;
+    border-bottom: 1px solid #000;
+}
+
+.header h1 {
+    font-size: 3rem;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+}
+
+.header .role {
+    font-size: 1rem;
+    color: #666;
+}
+
+/* AI Section */
+.ai-section {
+    padding: 4rem 0;
+    border-bottom: 1px solid #000;
+}
+
+.ai-section h2 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 2rem;
+}
+
+.ai-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    background: #000;
+    border: 1px solid #000;
+}
+
+.ai-link {
+    background: #fff;
+    border: none;
+    padding: 2rem 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-family: inherit;
+}
+
+.ai-link:hover {
+    background: #000;
+    color: #fff;
+}
+
+.ai-number {
+    font-size: 0.75rem;
+    margin-bottom: 0.5rem;
+    opacity: 0.5;
+}
+
+.ai-name {
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+/* Content Section */
+.content-section {
+    padding: 4rem 0;
+    border-bottom: 1px solid #000;
+}
+
+.two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 3rem;
+}
+
+.column h3 {
+    font-size: 1.125rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+
+.column p, .single-column p {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: #333;
+}
+
+.single-column h3 {
+    font-size: 1.125rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+
+/* Timeline Section */
+.timeline-section {
+    padding: 4rem 0;
+    border-bottom: 1px solid #000;
+}
+
+.timeline-section h2 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 2rem;
+}
+
+.timeline {
+    margin-bottom: 3rem;
+}
+
+.timeline-row {
+    display: grid;
+    grid-template-columns: 120px 1fr 200px;
+    gap: 2rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.timeline-row:last-child {
+    border-bottom: none;
+}
+
+.year {
+    font-size: 0.875rem;
+    color: #666;
+}
+
+.role-title {
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.company {
+    font-size: 0.9375rem;
+    color: #666;
+    text-align: right;
+}
+
+.education {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 2rem;
+    padding: 1.5rem 0;
+}
+
+.edu-label {
+    font-size: 0.875rem;
+    color: #666;
+}
+
+.edu-text {
+    font-size: 1rem;
+}
+
+/* Footer */
+.footer {
+    padding: 4rem 0 3rem;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.footer-grid a {
+    color: #000;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+    padding-bottom: 2px;
+}
+
+.footer-grid a:hover {
+    border-bottom-color: #000;
+}
+
+.location {
+    font-size: 0.875rem;
+    color: #666;
+}
+
+/* Toast */
+.toast {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: #000;
+    color: #fff;
+    padding: 1rem 2rem;
+    font-size: 0.875rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .grid-container {
+        padding: 0 1rem;
+    }
+
+    .header h1 {
+        font-size: 2rem;
+    }
+
+    .ai-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .two-column {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .timeline-row {
+        grid-template-columns: 1fr;
+        gap: 0.25rem;
+    }
+
+    .company {
+        text-align: left;
+    }
+
+    .education {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
