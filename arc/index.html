@@ -1,0 +1,2124 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Johan Kullendorff — En karriär i tre akter</title>
+    <meta name="description" content="Berättare. Felsökare. Byggare. Johan Kullendorffs karriär som scrollytelling — från journalistik till teknisk support till mjukvaruutveckling.">
+    <meta name="author" content="Johan Kullendorff">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Johan Kullendorff — En karriär i tre akter">
+    <meta property="og:description" content="Berättare. Felsökare. Byggare. Tre karriärer som bildar en helhet.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://johankullendorff.se">
+    <meta property="og:locale" content="sv_SE">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Johan Kullendorff — En karriär i tre akter">
+    <meta name="twitter:description" content="Berättare. Felsökare. Byggare. Tre karriärer som bildar en helhet.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* =============================================
+           RESET & BASE
+           ============================================= */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            background: #0a0a0a;
+            color: #e0e0e0;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* =============================================
+           CSS CUSTOM PROPERTIES
+           ============================================= */
+        :root {
+            /* Act 1: Berättaren — warm amber/sepia */
+            --act1-primary: #d4a062;
+            --act1-secondary: #c4883a;
+            --act1-glow: rgba(212, 160, 98, 0.15);
+            --act1-accent: #e8c18e;
+            --act1-bg-tint: rgba(212, 160, 98, 0.04);
+
+            /* Act 2: Felsökaren — cool blue/cyan */
+            --act2-primary: #4fc3f7;
+            --act2-secondary: #0288d1;
+            --act2-glow: rgba(79, 195, 247, 0.15);
+            --act2-accent: #81d4fa;
+            --act2-bg-tint: rgba(79, 195, 247, 0.04);
+
+            /* Act 3: Byggaren — green/terminal */
+            --act3-primary: #66bb6a;
+            --act3-secondary: #2e7d32;
+            --act3-glow: rgba(102, 187, 106, 0.15);
+            --act3-accent: #a5d6a7;
+            --act3-bg-tint: rgba(102, 187, 106, 0.04);
+
+            /* Finale — purple/lavender */
+            --finale-primary: #ce93d8;
+            --finale-secondary: #ab47bc;
+            --finale-glow: rgba(206, 147, 216, 0.15);
+            --finale-accent: #e1bee7;
+        }
+
+        /* =============================================
+           PROGRESS INDICATOR (side nav)
+           ============================================= */
+        .progress-nav {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 1.8rem;
+        }
+
+        .progress-nav__item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .progress-nav__label {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.2);
+            transition: all 0.4s ease;
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateX(10px);
+        }
+
+        .progress-nav__dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1.5px solid rgba(255, 255, 255, 0.25);
+            transition: all 0.4s ease;
+            flex-shrink: 0;
+        }
+
+        .progress-nav__item:hover .progress-nav__label {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .progress-nav__item:hover .progress-nav__dot {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .progress-nav__item.active .progress-nav__label {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .progress-nav__item[data-act="hero"].active .progress-nav__dot {
+            background: #fff;
+            border-color: #fff;
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+            transform: scale(1.3);
+        }
+        .progress-nav__item[data-act="hero"].active .progress-nav__label {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .progress-nav__item[data-act="1"].active .progress-nav__dot {
+            background: var(--act1-primary);
+            border-color: var(--act1-primary);
+            box-shadow: 0 0 12px var(--act1-glow);
+            transform: scale(1.3);
+        }
+        .progress-nav__item[data-act="1"].active .progress-nav__label {
+            color: var(--act1-primary);
+        }
+
+        .progress-nav__item[data-act="2"].active .progress-nav__dot {
+            background: var(--act2-primary);
+            border-color: var(--act2-primary);
+            box-shadow: 0 0 12px var(--act2-glow);
+            transform: scale(1.3);
+        }
+        .progress-nav__item[data-act="2"].active .progress-nav__label {
+            color: var(--act2-primary);
+        }
+
+        .progress-nav__item[data-act="3"].active .progress-nav__dot {
+            background: var(--act3-primary);
+            border-color: var(--act3-primary);
+            box-shadow: 0 0 12px var(--act3-glow);
+            transform: scale(1.3);
+        }
+        .progress-nav__item[data-act="3"].active .progress-nav__label {
+            color: var(--act3-primary);
+        }
+
+        .progress-nav__item[data-act="finale"].active .progress-nav__dot {
+            background: var(--finale-primary);
+            border-color: var(--finale-primary);
+            box-shadow: 0 0 12px var(--finale-glow);
+            transform: scale(1.3);
+        }
+        .progress-nav__item[data-act="finale"].active .progress-nav__label {
+            color: var(--finale-primary);
+        }
+
+        /* Connecting line between dots */
+        .progress-nav__line {
+            position: absolute;
+            right: 4px;
+            top: 5px;
+            bottom: 5px;
+            width: 2px;
+            background: rgba(255, 255, 255, 0.06);
+            z-index: -1;
+        }
+
+        /* =============================================
+           HERO / OPENING
+           ============================================= */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 50% 30%, rgba(255,255,255,0.03) 0%, transparent 70%);
+        }
+
+        .hero__kicker {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.3);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: heroFadeUp 1s ease 0.2s forwards;
+        }
+
+        .hero__title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 8vw, 6rem);
+            font-weight: 900;
+            line-height: 1.05;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.65) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0;
+            animation: heroFadeUp 1s ease 0.5s forwards;
+        }
+
+        .hero__tagline {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(1.05rem, 2.5vw, 1.4rem);
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.45);
+            max-width: 550px;
+            line-height: 1.7;
+            letter-spacing: 0.02em;
+            opacity: 0;
+            animation: heroFadeUp 1s ease 0.8s forwards;
+        }
+
+        .hero__tagline strong {
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        @keyframes heroFadeUp {
+            from { opacity: 0; transform: translateY(25px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero__scroll-cue {
+            position: absolute;
+            bottom: 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            color: rgba(255, 255, 255, 0.25);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            animation: scrollCuePulse 2.5s ease-in-out infinite;
+            opacity: 0;
+            animation: heroFadeUp 1s ease 1.2s forwards, scrollCuePulse 2.5s ease-in-out 1.5s infinite;
+        }
+
+        .hero__scroll-cue svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            animation: scrollCueBounce 2.5s ease-in-out infinite;
+        }
+
+        @keyframes scrollCuePulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes scrollCueBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(6px); }
+        }
+
+        /* =============================================
+           ACT SECTIONS — shared
+           ============================================= */
+        .act {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Background atmosphere per act */
+        .act::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 1.2s ease;
+            pointer-events: none;
+        }
+
+        .act.in-view::before {
+            opacity: 1;
+        }
+
+        .act--1::before {
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(212, 160, 98, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 80%, rgba(196, 136, 58, 0.05) 0%, transparent 50%);
+        }
+
+        .act--2::before {
+            background:
+                radial-gradient(ellipse at 80% 40%, rgba(79, 195, 247, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 20% 80%, rgba(2, 136, 209, 0.05) 0%, transparent 50%);
+        }
+
+        .act--3::before {
+            background:
+                radial-gradient(ellipse at 30% 60%, rgba(102, 187, 106, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 20%, rgba(46, 125, 50, 0.05) 0%, transparent 50%);
+        }
+
+        /* Decorative background elements */
+        .act__bg-element {
+            position: absolute;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 1.2s ease, transform 1.2s ease;
+        }
+
+        .act.in-view .act__bg-element {
+            opacity: 1;
+        }
+
+        /* Act 1: editorial lines */
+        .act--1 .act__bg-lines {
+            top: 8%;
+            left: 3%;
+            width: 220px;
+            height: 350px;
+        }
+
+        .act--1 .act__bg-lines line {
+            stroke: var(--act1-primary);
+            stroke-width: 0.5;
+            opacity: 0.1;
+        }
+
+        /* Act 1: quotation mark */
+        .act--1 .act__bg-quote {
+            bottom: 10%;
+            right: 5%;
+            font-family: 'Playfair Display', serif;
+            font-size: 18rem;
+            color: var(--act1-primary);
+            opacity: 0.03;
+            line-height: 0.8;
+            user-select: none;
+        }
+
+        /* Act 2: circuit pattern */
+        .act--2 .act__bg-circuit {
+            bottom: 8%;
+            right: 3%;
+            width: 280px;
+            height: 280px;
+        }
+
+        .act--2 .act__bg-circuit rect,
+        .act--2 .act__bg-circuit circle,
+        .act--2 .act__bg-circuit line {
+            stroke: var(--act2-primary);
+            fill: none;
+            stroke-width: 0.5;
+            opacity: 0.1;
+        }
+
+        /* Act 2: grid dots */
+        .act--2 .act__bg-grid {
+            top: 5%;
+            left: 3%;
+            width: 200px;
+            height: 200px;
+        }
+
+        .act--2 .act__bg-grid circle {
+            fill: var(--act2-primary);
+            opacity: 0.06;
+        }
+
+        /* Act 3: code brackets */
+        .act--3 .act__bg-code {
+            top: 10%;
+            right: 5%;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10rem;
+            color: var(--act3-primary);
+            opacity: 0.04;
+            line-height: 1;
+            user-select: none;
+        }
+
+        /* Act 3: terminal lines */
+        .act--3 .act__bg-terminal {
+            bottom: 8%;
+            left: 3%;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--act3-primary);
+            opacity: 0.06;
+            line-height: 2.2;
+            white-space: pre;
+            user-select: none;
+        }
+
+        /* Act content layout */
+        .act__content {
+            max-width: 820px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Act number & year range */
+        .act__header {
+            margin-bottom: 2.5rem;
+        }
+
+        .act__number {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease;
+        }
+
+        .act.in-view .act__number {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .act--1 .act__number { color: var(--act1-secondary); }
+        .act--2 .act__number { color: var(--act2-secondary); }
+        .act--3 .act__number { color: var(--act3-secondary); }
+
+        .act__title {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin: 0.5rem 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease 0.1s;
+        }
+
+        .act.in-view .act__title {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .act--1 .act__title {
+            font-family: 'Playfair Display', serif;
+            color: var(--act1-primary);
+        }
+
+        .act--2 .act__title {
+            font-family: 'Inter', sans-serif;
+            color: var(--act2-primary);
+        }
+
+        .act--3 .act__title {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--act3-primary);
+            font-size: clamp(2rem, 5vw, 3.5rem);
+        }
+
+        .act__years {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            font-weight: 300;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease 0.2s;
+        }
+
+        .act.in-view .act__years {
+            opacity: 0.5;
+            transform: translateY(0);
+        }
+
+        /* Divider line under header */
+        .act__divider {
+            width: 0;
+            height: 2px;
+            margin: 2rem 0;
+            transition: width 1s ease 0.4s;
+        }
+
+        .act.in-view .act__divider {
+            width: 80px;
+        }
+
+        .act--1 .act__divider { background: var(--act1-primary); }
+        .act--2 .act__divider { background: var(--act2-primary); }
+        .act--3 .act__divider { background: var(--act3-primary); }
+
+        /* Body content with staggered reveal */
+        .act__body {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: all 0.8s ease 0.5s;
+        }
+
+        .act.in-view .act__body {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Timeline entries */
+        .timeline {
+            margin-bottom: 2.5rem;
+        }
+
+        .timeline__entry {
+            padding: 1.2rem 0 1.2rem 2rem;
+            position: relative;
+            border-left: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .timeline__entry::before {
+            content: '';
+            position: absolute;
+            left: -4.5px;
+            top: 1.6rem;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            border: 2px solid;
+            background: #0a0a0a;
+        }
+
+        .act--1 .timeline__entry { border-left-color: rgba(212, 160, 98, 0.15); }
+        .act--1 .timeline__entry::before { border-color: var(--act1-primary); }
+
+        .act--2 .timeline__entry { border-left-color: rgba(79, 195, 247, 0.15); }
+        .act--2 .timeline__entry::before { border-color: var(--act2-primary); }
+
+        .act--3 .timeline__entry { border-left-color: rgba(102, 187, 106, 0.15); }
+        .act--3 .timeline__entry::before { border-color: var(--act3-primary); }
+
+        .timeline__years {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 0.3rem;
+        }
+
+        .act--1 .timeline__years { color: var(--act1-secondary); }
+        .act--2 .timeline__years { color: var(--act2-secondary); }
+        .act--3 .timeline__years { color: var(--act3-secondary); }
+
+        .timeline__role {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 0.2rem;
+        }
+
+        .timeline__org {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline__desc {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 300;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.55);
+        }
+
+        /* Skills / tags */
+        .act__skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .act__skill {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 0.4rem 0.9rem;
+            border-radius: 100px;
+            border: 1px solid;
+            letter-spacing: 0.03em;
+            transition: all 0.3s ease;
+        }
+
+        .act__skill:hover {
+            transform: translateY(-1px);
+        }
+
+        .act--1 .act__skill {
+            color: var(--act1-primary);
+            border-color: rgba(212, 160, 98, 0.25);
+            background: rgba(212, 160, 98, 0.06);
+        }
+        .act--1 .act__skill:hover {
+            background: rgba(212, 160, 98, 0.12);
+            border-color: rgba(212, 160, 98, 0.4);
+        }
+
+        .act--2 .act__skill {
+            color: var(--act2-primary);
+            border-color: rgba(79, 195, 247, 0.25);
+            background: rgba(79, 195, 247, 0.06);
+        }
+        .act--2 .act__skill:hover {
+            background: rgba(79, 195, 247, 0.12);
+            border-color: rgba(79, 195, 247, 0.4);
+        }
+
+        .act--3 .act__skill {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--act3-primary);
+            border-color: rgba(102, 187, 106, 0.25);
+            background: rgba(102, 187, 106, 0.06);
+        }
+        .act--3 .act__skill:hover {
+            background: rgba(102, 187, 106, 0.12);
+            border-color: rgba(102, 187, 106, 0.4);
+        }
+
+        /* Key takeaway box */
+        .act__takeaway {
+            padding: 1.5rem 2rem;
+            border-left: 3px solid;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 0 8px 8px 0;
+            margin-top: 2rem;
+        }
+
+        .act__takeaway-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .act--1 .act__takeaway { border-color: var(--act1-primary); }
+        .act--1 .act__takeaway-label { color: var(--act1-secondary); }
+
+        .act--2 .act__takeaway { border-color: var(--act2-primary); }
+        .act--2 .act__takeaway-label { color: var(--act2-secondary); }
+
+        .act--3 .act__takeaway { border-color: var(--act3-primary); }
+        .act--3 .act__takeaway-label { color: var(--act3-secondary); }
+
+        .act__takeaway-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 400;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.8);
+            font-style: italic;
+        }
+
+        /* =============================================
+           PROJECT CARDS (Act 3)
+           ============================================= */
+        .projects {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .project-card {
+            padding: 1.4rem 1.6rem;
+            background: rgba(102, 187, 106, 0.03);
+            border: 1px solid rgba(102, 187, 106, 0.1);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .project-card:hover {
+            background: rgba(102, 187, 106, 0.07);
+            border-color: rgba(102, 187, 106, 0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(102, 187, 106, 0.08);
+        }
+
+        .project-card__name {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--act3-accent);
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .project-card__name svg {
+            width: 14px;
+            height: 14px;
+            fill: var(--act3-primary);
+            opacity: 0.6;
+            flex-shrink: 0;
+        }
+
+        .project-card__desc {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 300;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 0.6rem;
+        }
+
+        .project-card__tech {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--act3-primary);
+            opacity: 0.6;
+        }
+
+        .project-card--wide {
+            grid-column: 1 / -1;
+        }
+
+        /* =============================================
+           TRANSITION BREAKS
+           ============================================= */
+        .act-break {
+            min-height: 35vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            gap: 2rem;
+        }
+
+        .act-break__line {
+            width: 1px;
+            height: 0;
+            transition: height 1s ease;
+        }
+
+        .act-break.in-view .act-break__line {
+            height: 80px;
+        }
+
+        .act-break--1to2 .act-break__line {
+            background: linear-gradient(to bottom, var(--act1-primary), var(--act2-primary));
+        }
+
+        .act-break--2to3 .act-break__line {
+            background: linear-gradient(to bottom, var(--act2-primary), var(--act3-primary));
+        }
+
+        .act-break--3tofinale .act-break__line {
+            background: linear-gradient(to bottom, var(--act3-primary), var(--finale-primary));
+        }
+
+        .act-break__text {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            font-style: italic;
+            text-align: center;
+            max-width: 500px;
+            line-height: 1.7;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: all 0.8s ease 0.3s;
+        }
+
+        .act-break.in-view .act-break__text {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .act-break--1to2 .act-break__text {
+            color: rgba(212, 160, 98, 0.4);
+        }
+
+        .act-break--2to3 .act-break__text {
+            color: rgba(79, 195, 247, 0.4);
+        }
+
+        .act-break--3tofinale .act-break__text {
+            color: rgba(102, 187, 106, 0.4);
+        }
+
+        /* =============================================
+           FINALE SECTION
+           ============================================= */
+        .finale {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 6rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .finale::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 50% 50%, rgba(206, 147, 216, 0.06) 0%, transparent 60%),
+                radial-gradient(ellipse at 30% 70%, rgba(212, 160, 98, 0.03) 0%, transparent 40%),
+                radial-gradient(ellipse at 70% 30%, rgba(79, 195, 247, 0.03) 0%, transparent 40%);
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .finale.in-view::before {
+            opacity: 1;
+        }
+
+        .finale__content {
+            position: relative;
+            z-index: 1;
+            max-width: 750px;
+        }
+
+        .finale__heading {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 4.5vw, 3rem);
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .finale.in-view .finale__heading {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .finale__heading em {
+            font-style: italic;
+            background: linear-gradient(135deg, var(--act1-primary), var(--act2-primary), var(--act3-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .finale__synthesis {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 300;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.55);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease 0.15s;
+        }
+
+        .finale.in-view .finale__synthesis {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Data summary cards */
+        .finale__data {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+            text-align: left;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease 0.25s;
+        }
+
+        .finale.in-view .finale__data {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .finale__data-card {
+            padding: 1.2rem 1.4rem;
+            background: rgba(206, 147, 216, 0.03);
+            border: 1px solid rgba(206, 147, 216, 0.1);
+            border-radius: 10px;
+        }
+
+        .finale__data-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--finale-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .finale__data-value {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 400;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* CTA button */
+        .finale__cta {
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #0a0a0a;
+            background: linear-gradient(135deg, var(--act1-primary), var(--finale-primary));
+            padding: 1rem 2.8rem;
+            border-radius: 100px;
+            text-decoration: none;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            letter-spacing: 0.02em;
+        }
+
+        .finale.in-view .finale__cta {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.8s ease 0.4s;
+        }
+
+        .finale__cta:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 12px 35px rgba(206, 147, 216, 0.25);
+        }
+
+        /* Contact links */
+        .finale__contacts {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease 0.5s;
+        }
+
+        .finale.in-view .finale__contacts {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .finale__contact {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            padding: 0.6rem 1.3rem;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 100px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .finale__contact:hover {
+            border-color: var(--finale-primary);
+            color: var(--finale-primary);
+            background: rgba(206, 147, 216, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .finale__contact svg {
+            width: 15px;
+            height: 15px;
+            fill: currentColor;
+        }
+
+        /* =============================================
+           LLM EASTER EGG
+           ============================================= */
+        .llm-easter-egg {
+            margin-top: 3rem;
+            opacity: 0;
+            transition: opacity 0.8s ease 0.7s;
+        }
+
+        .finale.in-view .llm-easter-egg {
+            opacity: 1;
+        }
+
+        .llm-trigger {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.15);
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 4px;
+            background: none;
+            transition: all 0.3s ease;
+            letter-spacing: 0.05em;
+        }
+
+        .llm-trigger:hover {
+            color: rgba(255, 255, 255, 0.5);
+            border-color: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: #0a0a0a;
+            background: var(--act3-primary);
+            padding: 0.7rem 1.5rem;
+            border-radius: 100px;
+            z-index: 1100;
+            transition: transform 0.4s ease;
+            pointer-events: none;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* LLM modal */
+        .llm-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .llm-modal.active {
+            display: flex;
+        }
+
+        .llm-modal__box {
+            background: #141414;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2.5rem;
+            max-width: 540px;
+            width: 100%;
+            position: relative;
+            animation: modalSlideUp 0.3s ease;
+        }
+
+        @keyframes modalSlideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .llm-modal__close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+
+        .llm-modal__close:hover {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .llm-modal__title {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 0.5rem;
+        }
+
+        .llm-modal__desc {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .llm-modal__prompt {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            max-height: 180px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+
+        .llm-modal__services {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .llm-modal__service {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            padding: 0.55rem 1.1rem;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            display: inline-block;
+        }
+
+        .llm-modal__service:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.25);
+            color: #fff;
+        }
+
+        /* =============================================
+           FOOTER
+           ============================================= */
+        .footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.15);
+            letter-spacing: 0.05em;
+        }
+
+        /* =============================================
+           RESPONSIVE
+           ============================================= */
+        @media (max-width: 768px) {
+            .progress-nav {
+                display: none;
+            }
+
+            .act {
+                padding: 4rem 1.5rem;
+            }
+
+            .act__takeaway {
+                padding: 1.2rem 1.5rem;
+            }
+
+            .projects {
+                grid-template-columns: 1fr;
+            }
+
+            .project-card--wide {
+                grid-column: auto;
+            }
+
+            .finale__contacts {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .finale__contact {
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
+            }
+
+            .finale__data {
+                grid-template-columns: 1fr;
+            }
+
+            .llm-modal__box {
+                padding: 1.5rem;
+            }
+
+            .llm-modal__services {
+                flex-direction: column;
+            }
+
+            .llm-modal__service {
+                text-align: center;
+            }
+
+            .act__bg-element {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .act__title {
+                font-size: 2rem;
+            }
+
+            .act--3 .act__title {
+                font-size: 1.6rem;
+            }
+
+            .hero__title {
+                font-size: 2.4rem;
+            }
+
+            .hero__kicker {
+                font-size: 0.65rem;
+                letter-spacing: 0.25em;
+            }
+
+            .finale__heading {
+                font-size: 1.6rem;
+            }
+        }
+
+        /* =============================================
+           PRINT STYLES
+           ============================================= */
+        @media print {
+            *, *::before, *::after {
+                background: transparent !important;
+                color: #222 !important;
+                box-shadow: none !important;
+                text-shadow: none !important;
+                -webkit-text-fill-color: #222 !important;
+            }
+
+            body {
+                background: #fff !important;
+                color: #222 !important;
+                font-size: 11pt;
+                line-height: 1.5;
+            }
+
+            .progress-nav,
+            .hero__scroll-cue,
+            .llm-easter-egg,
+            .llm-modal,
+            .toast,
+            .act__bg-element,
+            .act__bg-lines,
+            .act__bg-quote,
+            .act__bg-circuit,
+            .act__bg-grid,
+            .act__bg-code,
+            .act__bg-terminal,
+            .footer {
+                display: none !important;
+            }
+
+            .hero,
+            .act,
+            .finale {
+                min-height: auto !important;
+                padding: 1.5rem 0 !important;
+                page-break-inside: avoid;
+            }
+
+            .hero {
+                padding-bottom: 2rem !important;
+                border-bottom: 2px solid #222;
+                margin-bottom: 1rem;
+            }
+
+            .hero__title {
+                font-size: 2.2rem !important;
+                background: none !important;
+                -webkit-background-clip: unset !important;
+                -webkit-text-fill-color: #222 !important;
+            }
+
+            .hero__kicker,
+            .hero__tagline {
+                color: #555 !important;
+            }
+
+            .act__title {
+                font-size: 1.5rem !important;
+            }
+
+            .act--3 .act__title {
+                font-size: 1.3rem !important;
+            }
+
+            .act__number,
+            .timeline__years {
+                color: #666 !important;
+            }
+
+            .act__divider {
+                width: 60px !important;
+                background: #ccc !important;
+            }
+
+            .act__skill {
+                border-color: #ccc !important;
+                color: #444 !important;
+                background: #f5f5f5 !important;
+            }
+
+            .act__takeaway {
+                border-left-color: #999 !important;
+                background: #f8f8f8 !important;
+                padding: 1rem 1.5rem !important;
+            }
+
+            .act-break {
+                min-height: auto !important;
+                height: auto !important;
+                padding: 0.5rem 0 !important;
+            }
+
+            .act-break__line {
+                display: none !important;
+            }
+
+            .act-break__text {
+                font-size: 0.9rem !important;
+                color: #888 !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+
+            .project-card {
+                border-color: #ddd !important;
+                background: #fafafa !important;
+                break-inside: avoid;
+            }
+
+            .project-card__name {
+                color: #222 !important;
+            }
+
+            .finale__cta {
+                border: 2px solid #222 !important;
+                color: #222 !important;
+                background: none !important;
+            }
+
+            .finale__contact {
+                border-color: #ccc !important;
+                color: #444 !important;
+            }
+
+            .finale__data-card {
+                border-color: #ddd !important;
+                background: #fafafa !important;
+            }
+
+            /* Force all animated elements visible */
+            .act__number,
+            .act__title,
+            .act__years,
+            .act__body,
+            .act__divider,
+            .act-break__text,
+            .finale__heading,
+            .finale__synthesis,
+            .finale__data,
+            .finale__cta,
+            .finale__contacts {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+            }
+
+            a[href]::after {
+                content: " (" attr(href) ")";
+                font-size: 0.8em;
+                color: #666 !important;
+            }
+
+            .finale__contact svg,
+            .project-card__name svg {
+                display: none !important;
+            }
+        }
+
+        /* =============================================
+           SCROLLBAR
+           ============================================= */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* =============================================
+           UTILITY
+           ============================================= */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Selection color */
+        ::selection {
+            background: rgba(206, 147, 216, 0.3);
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==========================================
+         PROGRESS INDICATOR
+         ========================================== -->
+    <nav class="progress-nav" aria-label="Berättelsens akter">
+        <div class="progress-nav__line"></div>
+        <div class="progress-nav__item active" data-act="hero" data-target="hero">
+            <span class="progress-nav__label">Start</span>
+            <span class="progress-nav__dot"></span>
+        </div>
+        <div class="progress-nav__item" data-act="1" data-target="act1">
+            <span class="progress-nav__label">Berättaren</span>
+            <span class="progress-nav__dot"></span>
+        </div>
+        <div class="progress-nav__item" data-act="2" data-target="act2">
+            <span class="progress-nav__label">Felsökaren</span>
+            <span class="progress-nav__dot"></span>
+        </div>
+        <div class="progress-nav__item" data-act="3" data-target="act3">
+            <span class="progress-nav__label">Byggaren</span>
+            <span class="progress-nav__dot"></span>
+        </div>
+        <div class="progress-nav__item" data-act="finale" data-target="finale">
+            <span class="progress-nav__label">Nästa kapitel</span>
+            <span class="progress-nav__dot"></span>
+        </div>
+    </nav>
+
+    <!-- ==========================================
+         HERO
+         ========================================== -->
+    <section class="hero" id="hero">
+        <p class="hero__kicker">En karriär i tre akter</p>
+        <h1 class="hero__title">Johan Kullendorff</h1>
+        <p class="hero__tagline"><strong>Berättare. Felsökare. Byggare.</strong></p>
+        <div class="hero__scroll-cue" aria-hidden="true">
+            <span>Scrolla</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         ACT 1 — BERÄTTAREN
+         ========================================== -->
+    <section class="act act--1" id="act1">
+        <!-- Decorative background: editorial lines -->
+        <svg class="act__bg-element act__bg-lines" viewBox="0 0 220 350" aria-hidden="true">
+            <line x1="0" y1="20" x2="200" y2="20"/>
+            <line x1="0" y1="50" x2="160" y2="50"/>
+            <line x1="0" y1="80" x2="210" y2="80"/>
+            <line x1="0" y1="110" x2="130" y2="110"/>
+            <line x1="0" y1="140" x2="190" y2="140"/>
+            <line x1="0" y1="170" x2="155" y2="170"/>
+            <line x1="0" y1="200" x2="205" y2="200"/>
+            <line x1="0" y1="230" x2="120" y2="230"/>
+            <line x1="0" y1="260" x2="175" y2="260"/>
+            <line x1="0" y1="290" x2="145" y2="290"/>
+            <line x1="0" y1="320" x2="195" y2="320"/>
+        </svg>
+
+        <!-- Decorative: giant quotation mark -->
+        <div class="act__bg-element act__bg-quote" aria-hidden="true">&ldquo;</div>
+
+        <div class="act__content">
+            <div class="act__header">
+                <p class="act__number">Akt I</p>
+                <h2 class="act__title">Berättaren</h2>
+                <p class="act__years">2011 &mdash; 2018</p>
+            </div>
+
+            <div class="act__divider"></div>
+
+            <div class="act__body">
+                <div class="timeline">
+                    <div class="timeline__entry">
+                        <p class="timeline__years">2011 &ndash; 2013</p>
+                        <p class="timeline__role">Journalistutbildning</p>
+                        <p class="timeline__org">JMG, Göteborgs Universitet</p>
+                        <p class="timeline__desc">Grundutbildning i journalistik. Research, intervjuteknik, källkritik, redigering. Grunden som allt annat vilar på.</p>
+                    </div>
+
+                    <div class="timeline__entry">
+                        <p class="timeline__years">2012 &ndash; 2015</p>
+                        <p class="timeline__role">Redigerare</p>
+                        <p class="timeline__org">Hallpressen</p>
+                        <p class="timeline__desc">Koordinerade produktion av 13 dagstidningar. Nyhetsvärdering, layoutplanering, redigering under daglig deadline. Lärde sig att destillera kaos till klarhet &mdash; och att göra det innan klockan slog tolv.</p>
+                    </div>
+
+                    <div class="timeline__entry">
+                        <p class="timeline__years">2014 &ndash; nu</p>
+                        <p class="timeline__role">Frilansjournalist</p>
+                        <p class="timeline__org">AmiTe Production (eget företag)</p>
+                        <p class="timeline__desc">Artiklar, redigering, innehållsproduktion. Frilansens skola: hitta uppdrag, leverera, fakturera, upprepa.</p>
+                    </div>
+
+                    <div class="timeline__entry">
+                        <p class="timeline__years">2017 &ndash; 2018</p>
+                        <p class="timeline__role">Journalist</p>
+                        <p class="timeline__org">Hall Media</p>
+                        <p class="timeline__desc">Nyhetsrapportering och feature. Digital och tryckt publicering. Intervjuteknik, research, storytelling under daglig deadline.</p>
+                    </div>
+                </div>
+
+                <div class="act__skills">
+                    <span class="act__skill">Skrivande</span>
+                    <span class="act__skill">Redigering</span>
+                    <span class="act__skill">Nyhetsvärdering</span>
+                    <span class="act__skill">Koordinering</span>
+                    <span class="act__skill">Kommunikation</span>
+                    <span class="act__skill">Deadline-driven</span>
+                    <span class="act__skill">Intervjuteknik</span>
+                    <span class="act__skill">Layoutplanering</span>
+                </div>
+
+                <div class="act__takeaway">
+                    <p class="act__takeaway-label">Vad journalistiken gav</p>
+                    <p class="act__takeaway-text">Förmågan att ta komplext kaos och göra det begripligt. Under deadline. Varje dag.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Break 1→2 -->
+    <div class="act-break act-break--1to2">
+        <div class="act-break__line"></div>
+        <p class="act-break__text">Men berättaren ville förstå mer än bara orden&hellip;</p>
+    </div>
+
+    <!-- ==========================================
+         ACT 2 — FELSÖKAREN
+         ========================================== -->
+    <section class="act act--2" id="act2">
+        <!-- Decorative background: circuit board -->
+        <svg class="act__bg-element act__bg-circuit" viewBox="0 0 280 280" aria-hidden="true">
+            <rect x="10" y="10" width="60" height="60" rx="4"/>
+            <rect x="90" y="30" width="40" height="40" rx="4"/>
+            <rect x="160" y="10" width="80" height="30" rx="4"/>
+            <rect x="20" y="100" width="100" height="20" rx="4"/>
+            <circle cx="190" cy="110" r="15"/>
+            <rect x="10" y="150" width="50" height="50" rx="4"/>
+            <rect x="80" y="160" width="70" height="30" rx="4"/>
+            <circle cx="220" cy="180" r="25"/>
+            <rect x="170" y="230" width="60" height="20" rx="4"/>
+            <rect x="30" y="230" width="90" height="15" rx="4"/>
+            <line x1="70" y1="40" x2="90" y2="40" stroke-width="1"/>
+            <line x1="130" y1="50" x2="160" y2="25" stroke-width="1"/>
+            <line x1="120" y1="110" x2="175" y2="110" stroke-width="1"/>
+            <line x1="60" y1="175" x2="80" y2="175" stroke-width="1"/>
+        </svg>
+
+        <!-- Decorative: grid dots -->
+        <svg class="act__bg-element act__bg-grid" viewBox="0 0 200 200" aria-hidden="true">
+            <circle cx="20" cy="20" r="2"/><circle cx="60" cy="20" r="2"/><circle cx="100" cy="20" r="2"/><circle cx="140" cy="20" r="2"/><circle cx="180" cy="20" r="2"/>
+            <circle cx="20" cy="60" r="2"/><circle cx="60" cy="60" r="2"/><circle cx="100" cy="60" r="2"/><circle cx="140" cy="60" r="2"/><circle cx="180" cy="60" r="2"/>
+            <circle cx="20" cy="100" r="2"/><circle cx="60" cy="100" r="2"/><circle cx="100" cy="100" r="2"/><circle cx="140" cy="100" r="2"/><circle cx="180" cy="100" r="2"/>
+            <circle cx="20" cy="140" r="2"/><circle cx="60" cy="140" r="2"/><circle cx="100" cy="140" r="2"/><circle cx="140" cy="140" r="2"/><circle cx="180" cy="140" r="2"/>
+            <circle cx="20" cy="180" r="2"/><circle cx="60" cy="180" r="2"/><circle cx="100" cy="180" r="2"/><circle cx="140" cy="180" r="2"/><circle cx="180" cy="180" r="2"/>
+        </svg>
+
+        <div class="act__content">
+            <div class="act__header">
+                <p class="act__number">Akt II</p>
+                <h2 class="act__title">Felsökaren</h2>
+                <p class="act__years">2020 &mdash; nu</p>
+            </div>
+
+            <div class="act__divider"></div>
+
+            <div class="act__body">
+                <div class="timeline">
+                    <div class="timeline__entry">
+                        <p class="timeline__years">2020 &ndash; nu</p>
+                        <p class="timeline__role">Senior Technical Advisor</p>
+                        <p class="timeline__org">Concentrix (f.d. Webhelp Nordic)</p>
+                        <p class="timeline__desc">Andra linjens teknisk support i Apple-ekosystemet. Den som tar de ärenden ingen annan vill ha &mdash; second-line betyder att de enkla lösningarna redan är testade.</p>
+                    </div>
+                </div>
+
+                <p style="font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 300; line-height: 1.8; color: rgba(255, 255, 255, 0.55); margin-bottom: 2rem;">
+                    Plattformar: macOS, iOS, Windows 11, Intune, Azure AD. Systematisk felsökning varje dag &mdash; diagnostisera, isolera, lös, dokumentera. Processförbättring med mätbar påverkan på europeisk nivå. Eskalering och kunskapsdelning i globalt team. Daglig problemlösning under tidspress.
+                </p>
+
+                <div class="act__skills">
+                    <span class="act__skill">macOS</span>
+                    <span class="act__skill">iOS</span>
+                    <span class="act__skill">Windows 11</span>
+                    <span class="act__skill">Intune</span>
+                    <span class="act__skill">Azure AD</span>
+                    <span class="act__skill">Felsökning</span>
+                    <span class="act__skill">Eskalering</span>
+                    <span class="act__skill">Processförbättring</span>
+                </div>
+
+                <div class="act__takeaway">
+                    <p class="act__takeaway-label">Vad supporten gav</p>
+                    <p class="act__takeaway-text">Systematisk problemlösning. Tålamod att gräva djupt. Vanan att dokumentera allt.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Break 2→3 -->
+    <div class="act-break act-break--2to3">
+        <div class="act-break__line"></div>
+        <p class="act-break__text">Och felsökaren började se mönster som kunde automatiseras&hellip;</p>
+    </div>
+
+    <!-- ==========================================
+         ACT 3 — BYGGAREN
+         ========================================== -->
+    <section class="act act--3" id="act3">
+        <!-- Decorative background: code brackets -->
+        <div class="act__bg-element act__bg-code" aria-hidden="true">{ }</div>
+
+        <!-- Decorative: terminal lines -->
+        <div class="act__bg-element act__bg-terminal" aria-hidden="true">$ python app.py
+ * Running on http://127.0.0.1:5000
+$ pytest -v
+ ===== 15 passed =====
+$ git push origin main
+ To github.com:Kullendorff</div>
+
+        <div class="act__content">
+            <div class="act__header">
+                <p class="act__number">Akt III</p>
+                <h2 class="act__title">Byggaren</h2>
+                <p class="act__years">pågående</p>
+            </div>
+
+            <div class="act__divider"></div>
+
+            <div class="act__body">
+                <p style="font-family: 'Inter', sans-serif; font-size: 1.05rem; font-weight: 300; line-height: 1.8; color: rgba(255, 255, 255, 0.6); margin-bottom: 0.5rem;">
+                    Självlärd Python-utvecklare. Från att felsöka andras kod till att skriva egen.
+                </p>
+                <p style="font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 300; line-height: 1.8; color: rgba(255, 255, 255, 0.5); margin-bottom: 2.5rem;">
+                    Bygger verktyg som löser riktiga problem, inte showcase-projekt. Varje repo nedan existerar för att något behövde lösas.
+                </p>
+
+                <!-- Project cards -->
+                <div class="projects">
+                    <a href="https://github.com/Kullendorff/compareai" target="_blank" rel="noopener" class="project-card">
+                        <p class="project-card__name">
+                            <svg viewBox="0 0 16 16"><path d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1h-8a1 1 0 00-1 1v6.708A2.486 2.486 0 014.5 9h8V1.5z"/></svg>
+                            CompareAI
+                        </p>
+                        <p class="project-card__desc">Skicka samma prompt till Claude, GPT och Gemini. Se svaren sida vid sida.</p>
+                        <p class="project-card__tech">Flask &middot; AI APIs</p>
+                    </a>
+
+                    <a href="https://github.com/Kullendorff/debateAI" target="_blank" rel="noopener" class="project-card">
+                        <p class="project-card__name">
+                            <svg viewBox="0 0 16 16"><path d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1h-8a1 1 0 00-1 1v6.708A2.486 2.486 0 014.5 9h8V1.5z"/></svg>
+                            DebateAI
+                        </p>
+                        <p class="project-card__desc">LLM:er debatterar mot varandra i realtid. Server-sent events.</p>
+                        <p class="project-card__tech">Flask &middot; SSE</p>
+                    </a>
+
+                    <a href="https://github.com/Kullendorff/rpgbot" target="_blank" rel="noopener" class="project-card">
+                        <p class="project-card__name">
+                            <svg viewBox="0 0 16 16"><path d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1h-8a1 1 0 00-1 1v6.708A2.486 2.486 0 014.5 9h8V1.5z"/></svg>
+                            RPGBot
+                        </p>
+                        <p class="project-card__desc">Rollspelsassistent för Discord. 2000+ rader Python. 15+ tester. SQLite-databas.</p>
+                        <p class="project-card__tech">Python &middot; Discord.py &middot; SQLite</p>
+                    </a>
+
+                    <a href="https://github.com/Kullendorff/drivebot" target="_blank" rel="noopener" class="project-card">
+                        <p class="project-card__name">
+                            <svg viewBox="0 0 16 16"><path d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1h-8a1 1 0 00-1 1v6.708A2.486 2.486 0 014.5 9h8V1.5z"/></svg>
+                            DriveBot
+                        </p>
+                        <p class="project-card__desc">Google Drive i Discord. OAuth 2.0, filhantering, sökning.</p>
+                        <p class="project-card__tech">Python &middot; OAuth 2.0 &middot; Google APIs</p>
+                    </a>
+
+                    <a href="https://github.com/Kullendorff/transkribering_svensk" target="_blank" rel="noopener" class="project-card project-card--wide">
+                        <p class="project-card__name">
+                            <svg viewBox="0 0 16 16"><path d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1h-8a1 1 0 00-1 1v6.708A2.486 2.486 0 014.5 9h8V1.5z"/></svg>
+                            Transkribering
+                        </p>
+                        <p class="project-card__desc">Svenskt transkriptionsverktyg med Whisper API. Journalisten möter byggaren.</p>
+                        <p class="project-card__tech">Python &middot; OpenAI Whisper</p>
+                    </a>
+                </div>
+
+                <div class="act__skills">
+                    <span class="act__skill">Python</span>
+                    <span class="act__skill">Flask</span>
+                    <span class="act__skill">REST APIs</span>
+                    <span class="act__skill">SQLite</span>
+                    <span class="act__skill">OAuth 2.0</span>
+                    <span class="act__skill">Claude API</span>
+                    <span class="act__skill">OpenAI API</span>
+                    <span class="act__skill">Google APIs</span>
+                    <span class="act__skill">Pinecone</span>
+                    <span class="act__skill">Git</span>
+                </div>
+
+                <div class="act__takeaway">
+                    <p class="act__takeaway-label">Vad kodningen gav</p>
+                    <p class="act__takeaway-text">Förmågan att inte bara hitta problem &mdash; utan bygga lösningen.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Break 3→Finale -->
+    <div class="act-break act-break--3tofinale">
+        <div class="act-break__line"></div>
+    </div>
+
+    <!-- ==========================================
+         FINALE
+         ========================================== -->
+    <section class="finale" id="finale">
+        <div class="finale__content">
+            <h2 class="finale__heading">
+                Tre karriärer. En person.<br>
+                <em>Det fjärde kapitlet skriver vi tillsammans.</em>
+            </h2>
+
+            <p class="finale__synthesis">
+                Journalist som förstår teknik. Felsökare som kan kommunicera. Byggare som vet vad användaren behöver.
+            </p>
+
+            <!-- Data summary -->
+            <div class="finale__data">
+                <div class="finale__data-card">
+                    <p class="finale__data-label">Söker</p>
+                    <p class="finale__data-value">IT-support 2nd line<br>Technical Writer<br>Python Developer<br>Hybridroller tech + kommunikation</p>
+                </div>
+                <div class="finale__data-card">
+                    <p class="finale__data-label">Plats</p>
+                    <p class="finale__data-value">Göteborg<br>Remote / Hybrid</p>
+                </div>
+                <div class="finale__data-card">
+                    <p class="finale__data-label">Språk</p>
+                    <p class="finale__data-value">Svenska (modersmål)<br>Engelska (flytande)</p>
+                </div>
+            </div>
+
+            <a href="mailto:johan.kullendorff@gmail.com" class="finale__cta">
+                Kontakta mig
+            </a>
+
+            <div class="finale__contacts">
+                <a href="https://linkedin.com/in/johankullendorff" target="_blank" rel="noopener" class="finale__contact">
+                    <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    LinkedIn
+                </a>
+                <a href="https://github.com/Kullendorff" target="_blank" rel="noopener" class="finale__contact">
+                    <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                    GitHub
+                </a>
+                <a href="mailto:johan.kullendorff@gmail.com" class="finale__contact">
+                    <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    E-post
+                </a>
+                <a href="tel:+46708669259" class="finale__contact">
+                    <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                    0708-669259
+                </a>
+            </div>
+
+            <!-- LLM Easter egg -->
+            <div class="llm-easter-egg">
+                <button class="llm-trigger" id="llmTrigger">
+                    &gt; Fråga en AI om mig_
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         LLM MODAL
+         ========================================== -->
+    <div class="llm-modal" id="llmModal">
+        <div class="llm-modal__box">
+            <button class="llm-modal__close" id="llmClose">&times;</button>
+            <h3 class="llm-modal__title">Fråga en AI om Johan</h3>
+            <p class="llm-modal__desc">
+                Prompten kopieras automatiskt till urklipp. Klicka på en tjänst för att klistra in den där.
+            </p>
+            <div class="llm-modal__prompt" id="llmPrompt">Jag är en rekryterare som utvärderar Johan Kullendorff som kandidat. Baserat på följande profil, ge mig en professionell sammanfattning och tre styrkor.
+
+PROFIL:
+- Senior Technical Advisor, Concentrix (2020-nu) - Second-line teknisk support
+- Journalist och redigerare (6+ år) - koordinerade 13 dagstidningar
+- Självlärd utvecklare: Python, Flask, REST APIs, AI-integrationer
+- Göteborg, öppen för remote/hybrid</div>
+            <div class="llm-modal__services">
+                <a href="https://chat.openai.com/" target="_blank" rel="noopener" class="llm-modal__service" data-service="chatgpt">ChatGPT</a>
+                <a href="https://claude.ai/new" target="_blank" rel="noopener" class="llm-modal__service" data-service="claude">Claude</a>
+                <a href="https://gemini.google.com/" target="_blank" rel="noopener" class="llm-modal__service" data-service="gemini">Gemini</a>
+                <a href="https://perplexity.ai/" target="_blank" rel="noopener" class="llm-modal__service" data-service="perplexity">Perplexity</a>
+                <a href="https://chat.mistral.ai/" target="_blank" rel="noopener" class="llm-modal__service" data-service="mistral">Mistral</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">Kopierat till urklipp!</div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        Johan Kullendorff &middot; Göteborg &middot; 2025
+    </footer>
+
+    <!-- ==========================================
+         JAVASCRIPT
+         ========================================== -->
+    <script>
+    (function() {
+        'use strict';
+
+        // =============================================
+        // IntersectionObserver — scroll-triggered animations
+        // =============================================
+        const sectionObserverOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -8% 0px'
+        };
+
+        const breakObserverOptions = {
+            threshold: 0.4
+        };
+
+        const activeSections = new Set();
+
+        const sectionObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                    activeSections.add(entry.target.id);
+                } else {
+                    // Keep animations persistent
+                    activeSections.delete(entry.target.id);
+                }
+                updateProgressNav();
+            });
+        }, sectionObserverOptions);
+
+        const breakObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                }
+            });
+        }, breakObserverOptions);
+
+        // Observe all sections
+        document.querySelectorAll('.hero, .act, .finale').forEach(function(el) {
+            sectionObserver.observe(el);
+        });
+
+        document.querySelectorAll('.act-break').forEach(function(el) {
+            breakObserver.observe(el);
+        });
+
+        // =============================================
+        // Progress nav highlighting
+        // =============================================
+        function updateProgressNav() {
+            var navItems = document.querySelectorAll('.progress-nav__item');
+            navItems.forEach(function(item) { item.classList.remove('active'); });
+
+            // Priority: finale > act3 > act2 > act1 > hero
+            var priority = ['finale', 'act3', 'act2', 'act1', 'hero'];
+            for (var i = 0; i < priority.length; i++) {
+                var id = priority[i];
+                if (activeSections.has(id)) {
+                    var actKey = id === 'finale' ? 'finale' : id === 'hero' ? 'hero' : id.replace('act', '');
+                    var activeItem = document.querySelector('.progress-nav__item[data-act="' + actKey + '"]');
+                    if (activeItem) activeItem.classList.add('active');
+                    break;
+                }
+            }
+        }
+
+        // Click to scroll on progress nav
+        document.querySelectorAll('.progress-nav__item').forEach(function(item) {
+            item.addEventListener('click', function() {
+                var target = document.getElementById(item.dataset.target);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // =============================================
+        // Parallax-like subtle background movement
+        // =============================================
+        var ticking = false;
+
+        function onScroll() {
+            if (!ticking) {
+                requestAnimationFrame(function() {
+                    var vh = window.innerHeight;
+
+                    // Move decorative elements slightly based on scroll
+                    document.querySelectorAll('.act__bg-element').forEach(function(el) {
+                        var section = el.closest('.act');
+                        if (!section) return;
+                        var rect = section.getBoundingClientRect();
+                        var progress = -rect.top / vh;
+                        el.style.transform = 'translateY(' + (progress * 30) + 'px)';
+                    });
+
+                    // Hero fade on scroll
+                    var hero = document.querySelector('.hero');
+                    if (hero) {
+                        var scrollY = window.scrollY || window.pageYOffset;
+                        var opacity = Math.max(0, 1 - (scrollY / (vh * 0.6)));
+                        hero.style.opacity = opacity;
+                    }
+
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+
+        // =============================================
+        // LLM Easter egg modal
+        // =============================================
+        var llmPromptText = document.getElementById('llmPrompt').textContent;
+        var modal = document.getElementById('llmModal');
+        var toast = document.getElementById('toast');
+
+        function showToast() {
+            toast.classList.add('show');
+            setTimeout(function() { toast.classList.remove('show'); }, 2200);
+        }
+
+        function copyPrompt() {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(llmPromptText).then(function() {
+                    showToast();
+                }).catch(function() {
+                    fallbackCopy();
+                });
+            } else {
+                fallbackCopy();
+            }
+        }
+
+        function fallbackCopy() {
+            var textarea = document.createElement('textarea');
+            textarea.value = llmPromptText;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                showToast();
+            } catch (e) {
+                // Select the prompt text visually as last resort
+                var range = document.createRange();
+                range.selectNodeContents(document.getElementById('llmPrompt'));
+                var sel = window.getSelection();
+                sel.removeAllRanges();
+                sel.addRange(range);
+            }
+            document.body.removeChild(textarea);
+        }
+
+        function openLlmModal() {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            copyPrompt();
+        }
+
+        function closeLlmModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Trigger button
+        document.getElementById('llmTrigger').addEventListener('click', openLlmModal);
+
+        // Close button
+        document.getElementById('llmClose').addEventListener('click', closeLlmModal);
+
+        // Service links — copy prompt before navigating
+        document.querySelectorAll('.llm-modal__service').forEach(function(link) {
+            link.addEventListener('click', function() {
+                copyPrompt();
+            });
+        });
+
+        // Close on background click
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeLlmModal();
+            }
+        });
+
+        // Close on Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeLlmModal();
+            }
+        });
+
+        // =============================================
+        // Keyboard navigation support
+        // =============================================
+        document.querySelectorAll('.progress-nav__item').forEach(function(item) {
+            item.setAttribute('tabindex', '0');
+            item.setAttribute('role', 'button');
+            item.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    item.click();
+                }
+            });
+        });
+
+    })();
+    </script>
+</body>
+</html>
